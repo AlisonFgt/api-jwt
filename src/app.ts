@@ -17,8 +17,8 @@ export class App {
         if (err) {
             console.log(err.message)
         } else {
-            console.log('uri = ' + uri);
-            console.log('uri_ = ' + uri_);
+            console.log('uri =' + uri);
+            console.log('uri_ =' + uri_);
             console.log("Sucessfully Connected to MongoDB");
         }
     });
