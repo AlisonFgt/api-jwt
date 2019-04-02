@@ -4,6 +4,8 @@ import { ReflectiveInjector } from 'injection-js';
 import { App } from './app';
 import { AppRouter } from './router';
 import { TopicsController } from './modules/topics/topics.controller';
+import { AuthController } from './modules/auth/auth.controller';
+import { AuthMiddleware } from './modules/auth/auth.middleware';
 import { AppConfig } from './config';
 
 const injector = ReflectiveInjector.resolveAndCreate([
@@ -11,6 +13,8 @@ const injector = ReflectiveInjector.resolveAndCreate([
   AppConfig,
   AppRouter,
   TopicsController,
+  AuthController,
+  AuthMiddleware
 ]);
 
 injector.get(App);

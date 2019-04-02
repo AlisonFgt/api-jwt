@@ -3,13 +3,17 @@ import { Topic } from './topics.model';
 
 @Injectable()
 export class TopicsController {
+  isLive(req, res) {
+    res.status(200).send("It's Ok");
+  }
+
   //- GET - /topics # returns all topics
   list(req, res) {
     let topics = Topic.find((err: any, topics: any) => {
       if (err) {
         res.send(err)
       } else {
-        res.send(topics);
+        res.status(200).send(topics);
       }
     })
   }

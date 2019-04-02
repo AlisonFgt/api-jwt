@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 
-import { TopicsController } from './topics.controller';
+import { AuthController } from './auth.controller';
 import { testHandler } from '../../shared/utils/testUtils';
 
-describe('TopicsController', () => {
+describe('AuthController', () => {
   test('status: It should return API OK', async () => {
-    const response = await testHandler('get', new TopicsController().isLive);
+    const response = await testHandler('get', new AuthController().isLive);
     expect(response.status).toBe(200);
   });
 });
