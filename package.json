@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "server:serve": "./node_modules/.bin/nodemon -e ts --exec npm run server:start",
-    "server:start": "./node_modules/.bin/ts-node --project ./tsconfig.json ./src/index.ts",
+    "server:start": "node --inspect --require ./ts-hook.js ./src/index.ts",
     "server:test": "./node_modules/.bin/jest --config ./jest.config.js --detectOpenHandles --forceExit",
     "server:lint": "./node_modules/.bin/tslint -c ./tslint.json -p ./tsconfig.json 'src/**/*.ts'",
     "server:lint:fix": "./node_modules/.bin/tslint -c ./tslint.json -p ./tsconfig.json 'src/**/*.ts' --fix",

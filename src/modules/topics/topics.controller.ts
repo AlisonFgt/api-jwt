@@ -17,7 +17,7 @@ export class TopicsController {
       }
     })
   }
-  //- PUT - /topic  # inserts a new topic into the table
+  //- POST - /topic  # inserts a new topic into the table
   create(req,res) {
     let topic = new Topic(req.body);
 
@@ -49,7 +49,7 @@ export class TopicsController {
       }
     })
   }
-  //- POST - /topic/{1} # update a topic with id of 1
+  //- PUT - /topic/{1} # update a topic with id of 1
   update(req,res) {
     Topic.findByIdAndUpdate(req.params.id, req.body, (err: any, topic: any) => {
       if (err) {

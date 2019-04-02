@@ -16,9 +16,9 @@ export class AppRouter {
     this.router = Router();
     this.router.get('/topics', topicsController.list);
     this.router.get('/topic/:id', topicsController.find);
-    this.router.put('/topic', topicsController.create);
+    this.router.post('/topic', topicsController.create);
     this.router.delete('/topic/:id', topicsController.delete);
-    this.router.post('/topic/:id', topicsController.update);
+    this.router.put('/topic/:id', topicsController.update);
 
     // auth 
     this.router.get('/auth', authController.isLive);

@@ -12,13 +12,10 @@ export class App {
 
     //mongo config
     const uri: string = appConfig.MONGO_URI;
-    const uri_ = 'mongodb://localhost:27017/auth';
-    mongoose.connect(uri_, (err: any) => {
+    mongoose.connect(uri, (err: any) => {
         if (err) {
             console.log(err.message)
         } else {
-            console.log('uri =' + uri);
-            console.log('uri_ =' + uri_);
             console.log("Sucessfully Connected to MongoDB");
         }
     });
