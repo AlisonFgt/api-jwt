@@ -8,8 +8,8 @@ export class AuthController {
   }
 
   login(req, res) {
-    console.log(req.client_secret);
-    console.log(req.authorization);
+    console.log(req.username);
+    console.log(req.password);
     if(req.authorization != null){
         //auth ok
         const id = 1; //esse id viria do banco de dados
@@ -22,4 +22,3 @@ export class AuthController {
       return res.status(500).send('Login inválido!');
   }
 }
-

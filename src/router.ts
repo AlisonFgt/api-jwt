@@ -11,9 +11,13 @@ export class AppRouter {
     ,authController: AuthController
     ,authMiddleware: AuthMiddleware) {
     console.log('Routing...');
+    this.router = Router();
+
+    this.router.get('/', (req, res) => {
+      res.status(401).send('Api Authentication Service');
+    } )
 
     // topics
-    this.router = Router();
     this.router.get('/topics', topicsController.list);
     this.router.get('/topic/:id', topicsController.find);
     this.router.post('/topic', topicsController.create);
@@ -22,6 +26,6 @@ export class AppRouter {
 
     // auth 
     this.router.get('/auth', authController.isLive);
-    this.router.post('/auth', [ authMiddleware.checkHeaders ] , authController.login);
+    this.router.post('/auth', [ authMiddleware.checkHeaders, authMiddleware.findUserRedis ] , authController.login);
   }
 }

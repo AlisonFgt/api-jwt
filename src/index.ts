@@ -6,6 +6,7 @@ import { AppRouter } from './router';
 import { TopicsController } from './modules/topics/topics.controller';
 import { AuthController } from './modules/auth/auth.controller';
 import { AuthMiddleware } from './modules/auth/auth.middleware';
+import { RedisService } from './shared/redis.service';
 import { AppConfig } from './config';
 
 const injector = ReflectiveInjector.resolveAndCreate([
@@ -14,10 +15,8 @@ const injector = ReflectiveInjector.resolveAndCreate([
   AppRouter,
   TopicsController,
   AuthController,
-  AuthMiddleware
+  AuthMiddleware,
+  RedisService
 ]);
 
 injector.get(App);
-
-
-

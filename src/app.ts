@@ -26,7 +26,7 @@ export class App {
 
     this.server.use(appRouter.router);
 
-    this.server.listen(8080);
-    console.log('App listening on 8080');
+    this.server.listen(appConfig.APP_PORT);
+    console.log('App listening on ' + appConfig.APP_PORT + ' port.');
   }
 }
