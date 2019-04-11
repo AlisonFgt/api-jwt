@@ -1,4 +1,5 @@
 import { Injectable } from 'injection-js';
+import { User } from './auth.models';
 import jwt from 'jsonwebtoken';
 
 @Injectable()
@@ -7,9 +8,19 @@ export class AuthController {
     res.status(200).send("It's Ok");
   }
 
+  createUser(req,res) {
+    let user = new User(req.body);
+
+    user.save((err: any) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(user);
+      }
+    })
+  }
+
   login(req, res) {
-    console.log(req.username);
-    console.log(req.password);
     if(req.authorization != null){
         //auth ok
         const id = 1; //esse id viria do banco de dados

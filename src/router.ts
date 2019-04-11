@@ -27,5 +27,6 @@ export class AppRouter {
     // auth 
     this.router.get('/auth', authController.isLive);
     this.router.post('/auth', [ authMiddleware.checkHeaders, authMiddleware.findUserRedis ] , authController.login);
+    this.router.post('/user', authController.createUser);
   }
 }

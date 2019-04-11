@@ -15,15 +15,19 @@ export class AuthMiddleware {
         
         let encodedCredentials = header_authorization.split(header_authorization.substr(0, 6))[1];
         let credentials = new Buffer(encodedCredentials, 'base64').toString().split(':');
-        let username = credentials[0];
-        let password = crypto.MD5(credentials[1]).toString();
-        req.username = username;
-        req.password = password;
+        req.username = credentials[0];
+        req.password = crypto.MD5(credentials[1]).toString();
         next();
     }
 
     findUserRedis = (req, res, next) => {
-        this.redis.client.set(req.username, req.password)
-        next();
+        this.redis.client.get(req.username, function (err, reply) {
+            if (reply) {
+                console.log(reply);
+                return reply;
+            }
+
+            next();    
+        });       
     }
 }
