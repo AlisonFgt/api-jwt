@@ -16,7 +16,7 @@ export class AuthMiddleware {
 
         let encodedCredentials = header_authorization.split(header_authorization.substr(0, 6))[1];
         let credentials = new Buffer(encodedCredentials, 'base64').toString().split(':');
-        req.username = credentials[0];
+        req.userName = credentials[0];
         req.password = crypto.MD5(credentials[1]).toString();
 
         const bytes = crypto.AES.decrypt(header_client_secret, "@l150n_");
@@ -28,10 +28,11 @@ export class AuthMiddleware {
     }
 
     findUserRedis = (req, res, next) => {
-        let key = req.app + ':' + req.client + ':' + req.username;
+        let key = this.redis.buildKey(req);
         this.redis.client.get(key, function (err, reply) {
             if (reply) {
-                req.userId = reply
+                req.userId = reply;
+                req.isCached = true;
             }
             next();    
         });       

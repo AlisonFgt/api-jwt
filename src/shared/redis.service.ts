@@ -11,4 +11,12 @@ export class RedisService {
             console.log("Error " + err);
         });
     }
+
+    buildKey(req) {
+        if (!req.app || !req.client || !req.userName) {
+            return 'error';
+        } else {
+            return req.app + ':' + req.client + ':' + req.userName;
+        }
+    }
 }
