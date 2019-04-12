@@ -37,4 +37,12 @@ export class AuthMiddleware {
             next();    
         });       
     }
+
+    checkHeadersVerify = (req, res, next) => {
+        if (typeof(req.query.token) === 'string' && req.query.token.trim().length > 0) {
+            next();
+        } else {
+            res.status(400).json({ error: "Missing `token` on the query string." });
+        }
+    }
 }

@@ -25,7 +25,7 @@ export class AuthController {
   }
 
   @Bind
-  async login(req, res) {
+  async token(req, res) {
     let userId = 0;
 
     if (req.isCached) {
@@ -43,5 +43,15 @@ export class AuthController {
 
     var token = jwt.sign({ value: userId }, 'my_secret', { expiresIn: 600 }); // expires in 10min
     return res.status(200).send({ auth: true, id: userId, login: req.userName, token: token });
+  }
+
+  verifyToken(req, res) {
+    jwt.verify(req.query.token, 'my_secret', function (result) {
+      if (result instanceof Error) {
+          res.json({ isValid: false, reason: result.message });
+      } else {
+          res.json({ isValid: true, decoded: jwt.decode(req.query.token, { complete: true }) });
+      }
+    });
   }
 }
