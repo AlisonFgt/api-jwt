@@ -1,5 +1,6 @@
 import { Injectable } from 'injection-js';
 import { RedisService } from '../../shared/redis.service';
+import { AppConfig } from '../../config';
 import { User } from './auth.models';
 import { Bind } from '../../shared/utils/bind';
 import jwt from 'jsonwebtoken';
@@ -7,7 +8,7 @@ import jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthController {
-  constructor(private redis: RedisService) {}
+  constructor(private redis: RedisService, private appConfig: AppConfig) {}
   isLive(req, res) {
     res.status(200).send("It's Ok");
   }
@@ -41,12 +42,13 @@ export class AuthController {
       }
     }
 
-    var token = jwt.sign({ value: userId }, 'my_secret', { expiresIn: 600 }); // expires in 10min
+    var token = jwt.sign({ value: userId }, this.appConfig.JWT_KEY, { expiresIn: 600 }); // expires in 10min
     return res.status(200).send({ auth: true, id: userId, login: req.userName, token: token });
   }
 
+  @Bind
   verifyToken(req, res) {
-    jwt.verify(req.query.token, 'my_secret', function (result) {
+    jwt.verify(req.query.token, this.appConfig.JWT_KEY , result => {
       if (result instanceof Error) {
           res.json({ isValid: false, reason: result.message });
       } else {

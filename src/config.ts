@@ -7,6 +7,7 @@ export class AppConfig {
   REDIS_URI: string;
   APP_PORT: string;
   CRYPT_SECRET_KEY: string;
+  JWT_KEY: string;
 
   constructor() {
     dotenv.config();
@@ -14,5 +15,6 @@ export class AppConfig {
     this.APP_PORT = process.env.APP_PORT;
     this.REDIS_URI = process.env.REDIS_URI;
     this.CRYPT_SECRET_KEY = process.env.CRYPT_SECRET_KEY;
+    this.JWT_KEY = process.env.JWT_KEY;
   }
 }
